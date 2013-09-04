@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title><%= title %></title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#signup').click(function() {
+        document.getElementById('password').value='';
+        $('#login_block').hide();
+        $('#signup_block').show();
+    });
+    
+    $('#login').click(function() {
+        document.getElementById('newpassword').value='';
+        $('#signup_block').hide();
+        $('#login_block').show();
+    });
+   
+    $('#login').click(function() {
+        $('#form').attr('action', '/login');
+    });
+   
+    $('#signup').click(function() {
+        $('#form').attr('action', '/signup');
+    });
+});
+</script>
+
+<style type="text/css">
+body {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+}
+
+label {
+    color:#999;
+    padding:4px;
+    margin-top:4px;
+    color:#006699;
+}
+
+.input {
+    padding:9px;
+    border:solid 1px #999;
+    margin:4px;
+    width:220px;
+}
+
+.radio {
+    margin:4px;
+}
+
+.button {
+    font-size:15px;
+    padding:6px;
+    font-weight:bold;
+}
+
+label.error {
+    font-size:11px;
+    background-color:#dedede;
+    color:#000;
+    padding:3px;
+    margin-left:5px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+#signup_block {
+    display:none;
+}
+
+#login_div {
+    background-color:#F0F0F0; 
+    margin:0 auto; 
+    padding:20px; 
+    border:1px solid #B3ADAF; 
+    width:250px; 
+    -moz-border-radius:15px; 
+    border-radius:15px;
+}
+</style>
+</head>
+
+<body bgcolor="#403E3F">
+    <div style="margin-bottom: 10%;"></div>
+    <div id="login_div">
+        <form method="post" action="/login" id="form">
+            <div style="margin-bottom:6px">
+                <h2>Login or Signup</h2>
+                <label>Username</label> <br/>
+                <input type="text" name="username" id="username"  class="input" id="username" value="<%= username %>"/><br />
+                <input type="radio" name="choose" id="login" checked="checked" class="radio"/> I have an account <br />
+                <input type="radio" name="choose" id="signup" class="radio"/> I am new!<br />
+            </div>
+            
+            <div style="" id="login_block">
+                <label>Password</label><br />
+                <input type="password" name="password" id="password" class="input" id="password"/><br/>
+                <input type="submit" id="login_btn" value=" Login " class="button"/> 
+            </div>
+            
+            <div id="signup_block">
+                <label>Choose password</label><br/>
+                <input type="password" id="newpassword" name="newpassword" class="input" id="newpassword" /><br/>
+                <input type="submit" id="signup_btn" value=" Signup " class="button"/>
+            </div>
+        </form>
+        
+        <% if (message) { %>
+            <div style="margin-top: 5px;">&nbsp;</div>
+            <div style="margin: 0 auto; width:250px; color: orange; font-size: 12px; font-weight: bold; text-align: center;">
+                <%= message %>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
